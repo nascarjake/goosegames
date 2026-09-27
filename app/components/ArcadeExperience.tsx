@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { arcadeCartridges as cartridges, arcadeGames } from "../data/arcade";
+import { arcadeGames, studioCartridge } from "../data/arcade";
+import { useGameCatalog } from "../lib/game-catalog";
 import { Icon } from "./WorkbenchIcons";
 import { WorkbenchShell, WorkspaceToolbar } from "./WorkbenchShell";
 import { ArcadeScreen } from "./ArcadeScreen";
@@ -22,6 +23,14 @@ function Screws() {
 }
 
 export function ArcadeExperience() {
+  const games = useGameCatalog(arcadeGames);
+  const cartridges = [
+    {
+      ...studioCartridge,
+      description: `${games.length} games. Plenty of curiosity. Browse the cartridges, watch real gameplay, or load a browser game right here.`,
+    },
+    ...games,
+  ];
   const [selected, setSelected] = useState(0);
   const [sound, setSound] = useState(false);
   const [honks, setHonks] = useState(0);
@@ -36,7 +45,7 @@ export function ArcadeExperience() {
   const running = remaining > 0;
   const shelfStart = Math.min(
     Math.floor(selected / 3) * 3,
-    cartridges.length - 3,
+    Math.max(0, cartridges.length - 3),
   );
   const visibleCartridges = cartridges.slice(shelfStart, shelfStart + 3);
 
@@ -122,7 +131,7 @@ export function ArcadeExperience() {
           <h2>INSERT CURIOSITY.<br /><em>PRESS PLAY.</em></h2>
           <p>A collection of curious little games. Swing a chain, sink a shot, find your rhythm. There’s always another run.</p>
           <a href="#collection">Find your next game <span aria-hidden="true">↓</span></a>
-          <div className="hero-stats"><span><strong>{arcadeGames.length}</strong>GAMES & EXPERIMENTS</span><span><strong>{arcadeGames.filter(game => game.playUrl).length}</strong>PLAY IN YOUR BROWSER</span></div>
+          <div className="hero-stats"><span><strong>{games.length}</strong>GAMES & EXPERIMENTS</span><span><strong>{games.filter(game => game.playUrl).length}</strong>PLAY IN YOUR BROWSER</span></div>
         </div>
       <div className={styles.stage}>
         <div className={styles.blueStripe} aria-hidden="true" />
@@ -232,7 +241,7 @@ export function ArcadeExperience() {
                 {selected !== 0 ? (
                   <Link
                     className={styles.playLink}
-                    href={`/games/${cartridge.id}/`}
+                    href={`/play/?game=${encodeURIComponent(cartridge.id)}`}
                   >
                     {cartridge.playUrl ? "PLAY GAME" : "VIEW GAME"}{" "}
                     <Icon name="external" size={18} />
@@ -332,7 +341,7 @@ export function ArcadeExperience() {
       <div className={styles.belowCabinet}>
         <span>
           {String(selected + 1).padStart(2, "0")} / {cartridges.length}{" "}
-          CARTRIDGES · {arcadeGames.length} REAL GAMES
+          CARTRIDGES · {games.length} REAL GAMES
         </span>
         <Link href="#collection">
           Browse the collection <Icon name="arrow" size={15} />
@@ -344,13 +353,13 @@ export function ArcadeExperience() {
             <p className="eyebrow">THE CARTRIDGE COLLECTION</p>
             <h2>Find your next obsession.</h2>
           </div>
-          <span>{arcadeGames.length} games / made with curiosity</span>
+          <span>{games.length} games / made with curiosity</span>
         </div>
         <div className={styles.libraryGrid}>
-          {arcadeGames.map((game, index) => (
+          {games.map((game, index) => (
             <article key={game.id} data-selected={selected === index + 1}>
               <Link
-                href={`/games/${game.id}/`}
+                href={`/play/?game=${encodeURIComponent(game.id)}`}
                 aria-label={`Browse ${game.title}`}
               >
                 <span className={styles.libraryCover}>
@@ -367,7 +376,7 @@ export function ArcadeExperience() {
               </Link>
               <div className={styles.libraryLinks}>
                 {game.playUrl ? (
-                  <Link href={`/games/${game.id}/`}>Play game ↗</Link>
+                  <Link href={`/play/?game=${encodeURIComponent(game.id)}`}>Play game ↗</Link>
                 ) : (
                   <span>{game.id === "daho" ? "Archive" : "Preview"}</span>
                 )}

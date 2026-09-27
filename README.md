@@ -8,9 +8,9 @@ Use Node 22.13 or newer. Run `npm ci`, then `npm run dev` and open the printed l
 
 ## Content
 
-`app/data/arcade.ts` holds the catalog, game destinations, screenshots, and videos. Each entry receives a static `/games/<id>/` page. `playUrl` is the direct launch link; `embedUrl` enables the click-to-load player. Only add public game URLs supplied by the creator. Keep unavailable entries clearly marked as previews or archives.
+The published catalog comes from `https://jakedoesdev.com/api/games` at runtime, so the private **Goose Games catalogue** editor in the portfolio admin is the source of truth. Adding, publishing, or unpublishing a game there updates this site without a GitHub Pages rebuild. `app/data/arcade.ts` is a deliberately baked-in fallback for outages and legacy static `/games/<id>/` pages.
 
-The portfolio and standalone site currently keep their own copy of the catalog and assets so either can be deployed independently. Update both catalogs when changing game links. Cabinet artwork, media, and canvas presentation originated in the portfolio; no portfolio admin code or private worklog is included here.
+`playUrl` is the direct launch link; `embedUrl` enables the click-to-load player. Only add public game URLs supplied by the creator. Keep unavailable entries clearly marked as previews or archives. Cabinet artwork, media, and canvas presentation originated in the portfolio; no portfolio admin code or private worklog is included here.
 
 ## Hosting
 
