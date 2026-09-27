@@ -14,7 +14,7 @@ The portfolio and standalone site currently keep their own copy of the catalog a
 
 ## Hosting
 
-This project has its own Sites identity in `.openai/hosting.json`. Only the static `out/` directory is deployed. A private Sites review deployment does not connect or replace goosegames.dev. Custom-domain setup and public access are separate launch steps. Game binaries remain hosted at their existing destinations and are embedded or linked from the game pages.
+GitHub Actions publishes the static `out/` directory to GitHub Pages whenever `main` changes. The production custom domain is `goosegames.dev`; its GitHub Pages domain setting and Cloudflare DNS records are managed separately from the source repository. Game binaries remain hosted at their existing destinations and are embedded or linked from the game pages.
 
 ## Validation
 
