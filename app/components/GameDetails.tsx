@@ -17,12 +17,12 @@ export function GameDetails() {
   const game = games.find((item) => item.id === id);
 
   if (!game) {
-    return <WorkbenchShell><div className={styles.page}><nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/#collection">← All games</Link></nav><header className={styles.heading}><div><p className="eyebrow">GOOSE GAMES</p><h1>Cartridge not found</h1><p>Try the arcade collection for the latest published catalog.</p></div></header></div></WorkbenchShell>;
+    return <WorkbenchShell compact><div className={styles.page}><nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/#collection">← All games</Link></nav><header className={styles.heading}><div><p className="eyebrow">GOOSE GAMES</p><h1>Cartridge not found</h1><p>Try the arcade collection for the latest published catalog.</p></div></header></div></WorkbenchShell>;
   }
 
   const index = games.indexOf(game);
   const moreGames = [1, 2, 3].map((offset) => games[(index + offset) % games.length]);
-  return <WorkbenchShell><div className={styles.page}>
+  return <WorkbenchShell compact><div className={styles.page}>
     <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/#collection">← All games</Link><span>/</span><span>{game.title}</span></nav>
     <header className={styles.heading}><div><p className="eyebrow">GOOSE GAMES / {game.genre}</p><h1>{game.title}</h1><p>{game.tagline}</p></div><span className={styles.status}><i data-playable={Boolean(game.playUrl)} />{game.playUrl ? "PLAY IN YOUR BROWSER" : game.id === "daho" ? "FROM THE ARCHIVE" : "GAMEPLAY PREVIEW"}</span></header>
     <div className={styles.gameLayout}><div className={styles.primary}><GamePlayer game={game} /><section className={styles.about} aria-labelledby="about-game"><p className="eyebrow">THE GAME</p><h2 id="about-game">{game.tagline}</h2><p>{game.description}</p>{game.embedUrl && <p className={styles.controlNote}>{game.controlsHint ?? "Use the in-game menu for controls and settings. Some games are best played with a keyboard and mouse."}</p>}</section><GameGallery game={game} /></div>

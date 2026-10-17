@@ -23,7 +23,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
   if (!game) notFound();
   const index = arcadeGames.indexOf(game);
   const moreGames = [1, 2, 3].map(offset => arcadeGames[(index + offset) % arcadeGames.length]);
-  return <WorkbenchShell>
+  return <WorkbenchShell compact>
     <div className={styles.page}>
       <nav className={styles.breadcrumb} aria-label="Breadcrumb"><Link href="/#collection">← All games</Link><span>/</span><span>{game.title}</span></nav>
       <header className={styles.heading}>

@@ -2,8 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
-export function WorkbenchShell({ children }: { children: ReactNode; section?: string }) {
-  return <div className="site-shell">
+export function WorkbenchShell({ children, compact = false }: { children: ReactNode; section?: string; compact?: boolean }) {
+  return <div className={compact ? "site-shell game-shell" : "site-shell"}>
     <a className="skip-link" href="#main-content">Skip to games</a>
     <header className="site-header">
       <Link className="brand" href="/" aria-label="Goose Games home">
