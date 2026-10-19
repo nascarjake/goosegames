@@ -48,7 +48,7 @@ export const arcadeGames: ArcadeGame[] = [
   },
   {
     id: "revo",
-    title: "REVO",
+    title: "REFLEX",
     genre: "Rhythm",
     cover: cover("revo"),
     tagline: "Your keys. Your music.",
@@ -57,7 +57,7 @@ export const arcadeGames: ArcadeGame[] = [
     playUrl: "https://nascarjake.github.io/measure-web/",
     embedUrl: "https://nascarjake.github.io/measure-web/",
     screenshots: shots("revo", [
-      "REVO music library with track selection, key layouts, and difficulty settings.",
+      "REFLEX music library with track selection, key layouts, and difficulty settings.",
     ]),
   },
   {
