@@ -6,6 +6,7 @@ import { arcadeGames } from "../../data/arcade";
 import { WorkbenchShell } from "../../components/WorkbenchShell";
 import { GamePlayer } from "../../components/GamePlayer";
 import { GameGallery } from "../../components/GameGallery";
+import { GameDescription } from "../../components/GameDescription";
 import styles from "./page.module.css";
 
 export function generateStaticParams() { return arcadeGames.map(game => ({ slug: game.id })); }
@@ -33,7 +34,7 @@ export default async function GamePage({ params }: { params: Promise<{ slug: str
       <div className={styles.gameLayout}>
         <div className={styles.primary}>
           <GamePlayer game={game} />
-          <section className={styles.about} aria-labelledby="about-game"><p className="eyebrow">THE GAME</p><h2 id="about-game">{game.tagline}</h2><p>{game.description}</p>
+          <section className={styles.about} aria-labelledby="about-game"><p className="eyebrow">THE GAME</p><h2 id="about-game">{game.tagline}</h2><GameDescription description={game.description} className={styles.featureList} />
             {game.embedUrl && <p className={styles.controlNote}>{game.controlsHint ?? "Use the in-game menu for controls and settings. Some games are best played with a keyboard and mouse."}</p>}
           </section>
           <GameGallery game={game} />
