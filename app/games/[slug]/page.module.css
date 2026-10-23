@@ -12,3 +12,5 @@
 @media(max-width:600px){.breadcrumb{padding:9px 5px}.heading{display:block;padding:0 5px;margin-bottom:12px}.heading>div{display:block}.heading h1{font-size:38px}.heading>div>p:last-child{font-size:13px}.status{margin-top:8px}}
 @media(min-width:1101px) and (max-height:850px){.page{max-width:1260px}}
 @media(min-width:1101px) and (max-height:700px){.page{max-width:1090px}}
+
+.about .featureList{max-width:760px;margin:24px 0 0}.about .featureList h3{font:700 17px/1.4 var(--mono);letter-spacing:.04em;margin:0 0 10px;color:#253c56}.about .featureList ul{margin:0;padding-left:22px;display:grid;gap:8px}.about .featureList li{font-size:15px;line-height:1.65;color:#445366;padding-left:3px}
