@@ -351,7 +351,7 @@ export function ArcadeExperience() {
         <div className={styles.libraryHeader}>
           <div>
             <p className="eyebrow">THE CARTRIDGE COLLECTION</p>
-            <h2>Find your next obsession.</h2>
+            <h2>Available Games:</h2>
           </div>
           <span>{games.length} games / made with curiosity</span>
         </div>
